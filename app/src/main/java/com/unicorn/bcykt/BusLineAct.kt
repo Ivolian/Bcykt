@@ -61,8 +61,7 @@ class BusLineAct : AppCompatActivity(){
 
         val busStationSearch = BusLineSearch(this, BusLineQuery(key, BusLineQuery.SearchType.BY_LINE_NAME, "021"))
         busStationSearch.setOnBusLineSearchListener { result ,code ->
-
-
+        BusLineOverlay(map, result.busLines[0]).addToMap()
 
         }
 
