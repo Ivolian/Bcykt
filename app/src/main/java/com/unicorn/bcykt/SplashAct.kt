@@ -10,7 +10,7 @@ class SplashAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_splash)
 
-        startActivity(Intent(this, MainAct::class.java))
+        startActivity(Intent(this, BusLineAct::class.java))
     }
 
 }
