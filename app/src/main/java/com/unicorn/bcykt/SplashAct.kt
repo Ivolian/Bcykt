@@ -2,15 +2,16 @@ package com.unicorn.bcykt
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.unicorn.bcykt.main.MainAct
+import me.yokeyword.fragmentation.SupportActivity
 
-class SplashAct : AppCompatActivity() {
+class SplashAct : SupportActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_splash)
 
-        startActivity(Intent(this, BusLineAct::class.java))
+        startActivity(Intent(this, MainAct::class.java))
     }
 
 }
