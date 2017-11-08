@@ -17,13 +17,11 @@ import me.yokeyword.fragmentation.SupportFragment
 class BusStationFra : SupportFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frg_bus_station, container, false)
+        val view = inflater.inflate(R.layout.frg_bus_station, container, false)
+        searchStation("四川北路")
+        return view
     }
 
-    override fun onSupportVisible() {
-        super.onSupportVisible()
-        searchStation("四川北路")
-    }
 
     private fun searchStation(keyword: String) {
         BusStationSearch(context, BusStationQuery(keyword, Constant.cityCode)).apply {
