@@ -2,14 +2,17 @@ package com.unicorn.bcykt.bus
 
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.MyLocationStyle
+import com.amap.api.services.busline.BusStationItem
 import com.amap.api.services.busline.BusStationQuery
 import com.amap.api.services.busline.BusStationSearch
 import com.blankj.utilcode.util.ToastUtils
+import com.dl7.drag.DragSlopLayout
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.app.Constant
 import kotlinx.android.synthetic.main.fra_bus_station.*
@@ -39,6 +42,17 @@ class BusStationFra : SupportFragment() {
         mapView.onDestroy()
     }
 
+    var f= true;
+
+    override fun onBackPressedSupport(): Boolean {
+        drag_layout.setAnimatorMode(DragSlopLayout.SLIDE_BOTTOM);	// 设置动画模式
+       if (f)
+        drag_layout.startInAnim();	// Animate 模式
+        else
+           drag_layout.startOutAnim();
+        f = !f
+        return true;
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fra_bus_station, container, false)
@@ -74,24 +88,6 @@ class BusStationFra : SupportFragment() {
         mapView.onCreate(savedInstanceState)
         renderMap()
 
-//        dragLayout.setAttachScrollView(frameLayout)
-//
-//
-//        slideUp = SlideUpBuilder(recyclerView)
-//                .withListeners(object : SlideUp.Listener.Events {
-//                    override fun onSlide(percent: Float) {
-//                        dim.alpha = 1 - percent / 100
-//                    }
-//
-//                    override fun onVisibilityChanged(visibility: Int) {
-//
-//                    }
-//                })
-//                .withStartGravity(Gravity.BOTTOM)
-//                .withLoggingEnabled(true)
-//                .withGesturesEnabled(true)
-//                .withStartState(SlideUp.State.HIDDEN)
-//                .build()
 //        dragLayout.setAttachScrollView(recyclerView)
     }
 
@@ -101,11 +97,27 @@ class BusStationFra : SupportFragment() {
                 if (code != 1000) {
                     ToastUtils.showShort("错误码:" + code)
                 } else {
-                    BusStationOverlay(mapView.map,result.busStations).addToMap()
+                    if (result.busStations.size!=0) {
+                        BusStationOverlay(mapView.map, result.busStations).addToMap()
+                        renderBusStations(result.busStations)
+                    }
+
                 }
             }
         }.searchBusStationAsyn()
     }
+
+    private fun renderBusStations(stations: List<BusStationItem>) {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        BusStationAdapter().apply {
+            bindToRecyclerView(recyclerView)
+            setNewData(stations)
+
+        }
+//        dragLayout.setAttachScrollView(recyclerView);
+
+    }
+
 
 
 }

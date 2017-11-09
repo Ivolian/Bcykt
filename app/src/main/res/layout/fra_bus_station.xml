@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.dl7.drag.DragSlopLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drag_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    app:collapse_parallax="2"
+    app:mode="animate">
 
-    <com.amap.api.maps.TextureMapView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.amap.api.maps.TextureMapView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/material_deepOrange_50" />
+        android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:text="缩略图"
+            android:textColor="#333333" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</com.dl7.drag.DragSlopLayout>
