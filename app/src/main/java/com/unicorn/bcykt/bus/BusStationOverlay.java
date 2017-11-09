@@ -6,7 +6,7 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.services.busline.BusStationItem;
+import com.amap.api.services.core.PoiItem;
 import com.unicorn.bcykt.R;
 
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ public class BusStationOverlay {
 
     private AMap map;
     private ArrayList<Marker> markers = new ArrayList();
-    private List<BusStationItem> busStationItemList;
+    private List<PoiItem> busStationItemList;
     private BitmapDescriptor busBitmap;
 
 
-    public BusStationOverlay(AMap map, List<BusStationItem> busStationItemList) {
+    public BusStationOverlay(AMap map, List<PoiItem> busStationItemList) {
         this.map = map;
         this.busStationItemList = busStationItemList;
     }
@@ -87,10 +87,10 @@ public class BusStationOverlay {
 
         return -1;
     }
-
-    public BusStationItem getBusStationItem(int pos) {
-        return pos >= 0 && pos < this.busStationItemList.size() ? (BusStationItem) this.busStationItemList.get(pos) : null;
-    }
+//
+//    public BusStationItem getBusStationItem(int pos) {
+//        return pos >= 0 && pos < this.busStationItemList.size() ?  this.busStationItemList.get(pos) : null;
+//    }
 
 
 }
