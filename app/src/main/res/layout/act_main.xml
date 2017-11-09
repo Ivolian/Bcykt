@@ -33,7 +33,7 @@
         app:stl_overlineThickness="0dp"
         app:stl_underlineThickness="0dp" />
 
-    <android.support.v4.view.ViewPager
+    <com.unicorn.bcykt.other.NoTouchPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

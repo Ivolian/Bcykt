@@ -1,8 +1,11 @@
 package com.unicorn.bcykt.app
 
+import com.amap.api.services.core.LatLonPoint
+
 object Constant{
 
     val cityCode = "201"
-    var latitude = 0.0
-    var longitude = 0.0
+    val busCode = "150700"
+    val radius = 1000
+    lateinit var latLonPoint: LatLonPoint
 }

@@ -2,7 +2,7 @@ package com.unicorn.bcykt
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import kotlinx.android.synthetic.main.fra_bus_station.*
+import kotlinx.android.synthetic.main.fra_nearby_station.*
 
 /**
  * Created by thinkpad on 2017/11/8.
