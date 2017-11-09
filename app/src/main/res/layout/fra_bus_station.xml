@@ -1,37 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dl7.drag.DragSlopLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.unicorn.bcykt.other.SplitLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drag_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
-    app:collapse_parallax="2"
-    app:mode="animate">
+    app:splitChildMinSize="0dp"
+    app:splitOrientation="vertical">
 
-    <com.amap.api.maps.TextureMapView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.amap.api.maps.TextureMapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:clickable="true"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:text="缩略图"
-            android:textColor="#333333" />
+</com.unicorn.bcykt.other.SplitLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</com.dl7.drag.DragSlopLayout>

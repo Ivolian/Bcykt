@@ -12,11 +12,13 @@ import com.amap.api.services.busline.BusStationItem
 import com.amap.api.services.busline.BusStationQuery
 import com.amap.api.services.busline.BusStationSearch
 import com.blankj.utilcode.util.ToastUtils
-import com.dl7.drag.DragSlopLayout
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.app.Constant
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.fra_bus_station.*
 import me.yokeyword.fragmentation.SupportFragment
+
+
 
 
 class BusStationFra : SupportFragment() {
@@ -37,22 +39,10 @@ class BusStationFra : SupportFragment() {
     }
 
     override fun onDestroy() {
-//        setCameraPosition(aMap.getCameraPosition())//保存地图状态
         super.onDestroy()
         mapView.onDestroy()
     }
 
-    var f= true;
-
-    override fun onBackPressedSupport(): Boolean {
-        drag_layout.setAnimatorMode(DragSlopLayout.SLIDE_BOTTOM);	// 设置动画模式
-       if (f)
-        drag_layout.startInAnim();	// Animate 模式
-        else
-           drag_layout.startOutAnim();
-        f = !f
-        return true;
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fra_bus_station, container, false)
@@ -101,7 +91,6 @@ class BusStationFra : SupportFragment() {
                         BusStationOverlay(mapView.map, result.busStations).addToMap()
                         renderBusStations(result.busStations)
                     }
-
                 }
             }
         }.searchBusStationAsyn()
@@ -114,7 +103,11 @@ class BusStationFra : SupportFragment() {
             setNewData(stations)
 
         }
-//        dragLayout.setAttachScrollView(recyclerView);
+        recyclerView.addItemDecoration(
+                HorizontalDividerItemDecoration.Builder(context)
+                        .colorResId(R.color.material_grey_400)
+                        .size(1)
+                        .build())
 
     }
 
