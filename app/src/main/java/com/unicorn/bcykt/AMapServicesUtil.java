@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.bus;
+package com.unicorn.bcykt;
 
 import android.graphics.Bitmap;
 

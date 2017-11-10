@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.bus;
+package com.unicorn.bcykt.bus.overlay;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -83,7 +83,7 @@ public class RouteOverlay {
 	 * @since V2.1.0
 	 */
 	protected BitmapDescriptor getStartBitmapDescriptor() {
-		return BitmapDescriptorFactory.fromResource(R.drawable.amap_start);
+		return BitmapDescriptorFactory.fromResource(R.mipmap.map_star_ic);
 	}
 	/**
 	 * 给终点Marker设置图标，并返回更换图标的图片。如不用默认图片，需要重写此方法。
@@ -91,7 +91,7 @@ public class RouteOverlay {
 	 * @since V2.1.0
 	 */
 	protected BitmapDescriptor getEndBitmapDescriptor() {
-		return BitmapDescriptorFactory.fromResource(R.drawable.amap_end);
+		return BitmapDescriptorFactory.fromResource(R.mipmap.map_end_ic);
 	}
 	/**
 	 * 给公交Marker设置图标，并返回更换图标的图片。如不用默认图片，需要重写此方法。
@@ -196,7 +196,7 @@ public class RouteOverlay {
 	}
 
 	protected int getWalkColor() {
-		return Color.parseColor("#6db74d");
+		return Color.parseColor("#2BBCF7");
 	}
 
 	/**

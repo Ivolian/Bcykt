@@ -18,10 +18,13 @@ import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
 import com.amap.api.services.route.*
 import com.amap.api.services.route.RouteSearch.WalkRouteQuery
+import com.unicorn.bcykt.AMapServicesUtil
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.app.Constant
 import com.unicorn.bcykt.app.Constant.busCode
 import com.unicorn.bcykt.app.Constant.cityCode
+import com.unicorn.bcykt.bus.adapter.BusStationAdapter
+import com.unicorn.bcykt.bus.overlay.WalkRouteOverlay
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.fra_nearby_station.*
 import me.yokeyword.fragmentation.SupportFragment
@@ -45,8 +48,11 @@ class NearbyStationFra : SupportFragment() {
             myLocationStyle = MyLocationStyle().apply {
                 // 定位一次，且将视角移动到地图中心点。
                 myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)
-//                myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.poi2))
+                myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.map_site_light_ic))
+//                    showMyLocation(false)
             }
+
+            uiSettings.isZoomControlsEnabled = false
             uiSettings.isMyLocationButtonEnabled = true
             // 开始定位
             isMyLocationEnabled = true
