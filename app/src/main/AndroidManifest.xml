@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".main.MainAct" />
         <activity android:name=".BusLineAct" />
+<activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
