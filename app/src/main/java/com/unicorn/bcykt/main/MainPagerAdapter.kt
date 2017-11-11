@@ -10,7 +10,7 @@ import com.unicorn.bcykt.empty.EmptyFra
 class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     companion object {
-        val titles = listOf("附近", "线路", "班车", "统计")
+        val titles = listOf("附近", "班车", "统计")
     }
 
     override fun getItem(position: Int): Fragment {

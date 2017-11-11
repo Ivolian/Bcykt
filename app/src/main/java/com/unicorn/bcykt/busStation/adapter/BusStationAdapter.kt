@@ -1,11 +1,13 @@
 package com.unicorn.bcykt.busStation.adapter
 
+import android.widget.ImageView
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.busStation.entity.BusStation
 import com.unicorn.bcykt.busStation.entity.BusStationLine
+import com.unicorn.bcykt.busStation.renderer.BusStationLineRender
 import com.unicorn.bcykt.busStation.renderer.BusStationRender
 
 class BusStationAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder>(null) {
@@ -19,7 +21,7 @@ class BusStationAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHol
         when (item.itemType) {
             BusStation.type -> {
                 item as BusStation
-                helper.itemView.setOnClickListener {
+                helper.getView<ImageView>(R.id.ivArrow).setOnClickListener {
                     val pos = helper.adapterPosition
                     if (item.isExpanded) {
                         collapse(pos)
@@ -28,11 +30,9 @@ class BusStationAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHol
 //                        expandAll();
                     }
                 }
-                BusStationRender(helper, item ).render()
+                BusStationRender(helper, item).render()
             }
-            BusStationLine.type -> {
-                item as BusStationLine
-            }
+            BusStationLine.type -> BusStationLineRender(helper, item as BusStationLine).render()
         }
     }
 

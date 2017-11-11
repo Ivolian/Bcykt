@@ -2,6 +2,8 @@ package com.unicorn.bcykt.busStation
 
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.ColorUtils
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +54,10 @@ class NearbyStationFra : SupportFragment() {
                 // 定位一次，且将视角移动到地图中心点。
                 myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)
                 myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.map_site_light_ic))
+                val color =               ContextCompat.getColor(context,R.color.colorPrimary)
+
+                strokeColor(color)
+                radiusFillColor(ColorUtils.setAlphaComponent(color,40))
             }
             uiSettings.isZoomControlsEnabled = false
             uiSettings.isMyLocationButtonEnabled = true
@@ -75,7 +81,10 @@ class NearbyStationFra : SupportFragment() {
                     .size(1)
                     .build())
         }
-//        busStationAdapter.setOnItemClickListener { _, _, pos -> s(busStationAdapter.getItem(pos)!!) }
+        busStationAdapter.setOnItemClickListener { _, _, pos ->
+            val item = busStationAdapter.getItem(pos)
+            (item as? BusStation)?.let { s(it.poiItem) }
+        }
     }
 
     private fun searchNearbyStation() {
@@ -92,9 +101,10 @@ class NearbyStationFra : SupportFragment() {
                             val pois = result.pois
                             val multi = ArrayList<MultiItemEntity>()
                             for (poi in pois) {
-                                val bus=BusStation(poi)
+                                val bus = BusStation(poi)
+                                var i = 1
                                 poi.snippet.split(";").forEach { lineName ->
-                                    bus.addSubItem(BusStationLine(lineName, "一分钟后到达"))
+                                    bus.addSubItem(BusStationLine(lineName, "${i++}分钟"))
 
                                 }
                                 multi.add(bus)
@@ -133,7 +143,7 @@ class NearbyStationFra : SupportFragment() {
                     b.include(AMapServicesUtil.convertToLatLng(poiItem.latLonPoint))
 
                     val bounds = b.build()
-                    mapView.map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
+                    mapView.map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
 
                     walkRouteOverlay?.removeFromMap()
                     walkRouteOverlay = WalkRouteOverlay(context, mapView.map, result.paths[0], Constant.latLonPoint, poiItem.latLonPoint).addToMap()

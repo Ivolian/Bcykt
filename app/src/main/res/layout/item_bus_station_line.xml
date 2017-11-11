@@ -1,10 +1,47 @@
-<TextView android:id="@+id/tvName"
-    android:layout_width="wrap_content"
-    android:layout_height="40dp"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/material_white"
+    android:foreground="?attr/selectableItemBackground"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="12dp"
-    android:text="18路"
-    android:textColor="@color/material_black"
-    android:textSize="18dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    <ImageView
+        android:id="@+id/ivBus"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@mipmap/travel_busblue_ic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLineName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="18路"
+        android:textColor="@color/material_black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivBus"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:text="约1分钟后达到"
+        android:textColor="@color/material_grey_600"
+        android:textSize="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvLineName"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
+

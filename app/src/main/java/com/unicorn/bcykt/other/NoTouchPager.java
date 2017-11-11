@@ -1,9 +1,8 @@
 package com.unicorn.bcykt.other;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
+import android.view.View;
 
 
 public class NoTouchPager extends android.support.v4.view.ViewPager {
@@ -16,15 +15,25 @@ public class NoTouchPager extends android.support.v4.view.ViewPager {
         super(context, attrs);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public boolean onTouchEvent(MotionEvent arg0) {
-        return false;
-    }
+//    @SuppressLint("ClickableViewAccessibility")
+//    @Override
+//    public boolean onTouchEvent(MotionEvent arg0) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent arg0) {
+//        return false;
+//    }
+//
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent arg0) {
-        return false;
+    public boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
+        if (Math.abs(dx) > 50) {
+            return super.canScroll(v, checkV, dx, x, y);
+        } else {
+            return true;
+        }
     }
 
 }
