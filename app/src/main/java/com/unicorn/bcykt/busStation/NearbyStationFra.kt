@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.bus
+package com.unicorn.bcykt.busStation
 
 
 import android.os.Bundle
@@ -23,8 +23,8 @@ import com.unicorn.bcykt.R
 import com.unicorn.bcykt.app.Constant
 import com.unicorn.bcykt.app.Constant.busCode
 import com.unicorn.bcykt.app.Constant.cityCode
-import com.unicorn.bcykt.bus.adapter.BusStationAdapter
-import com.unicorn.bcykt.bus.overlay.WalkRouteOverlay
+import com.unicorn.bcykt.busStation.adapter.BusStationAdapter
+import com.unicorn.bcykt.busStation.overlay.WalkRouteOverlay
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.fra_nearby_station.*
 import me.yokeyword.fragmentation.SupportFragment
@@ -49,17 +49,12 @@ class NearbyStationFra : SupportFragment() {
                 // 定位一次，且将视角移动到地图中心点。
                 myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)
                 myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.map_site_light_ic))
-//                    showMyLocation(false)
             }
-
             uiSettings.isZoomControlsEnabled = false
             uiSettings.isMyLocationButtonEnabled = true
             // 开始定位
             isMyLocationEnabled = true
-//            var mCameraUpdate = CameraUpdateFactory.zoomTo(17f)
-//            moveCamera(mCameraUpdate)
             setOnMyLocationChangeListener { location ->
-
                 Constant.latLonPoint = LatLonPoint(location.latitude, location.longitude)
                 searchNearbyStation()
             }
@@ -77,18 +72,13 @@ class NearbyStationFra : SupportFragment() {
                     .size(1)
                     .build())
         }
-
-        busStationAdapter.setOnItemClickListener { _, _, pos ->
-            val poiItem = busStationAdapter.getItem(pos)
-            s(poiItem!!)
-        }
+        busStationAdapter.setOnItemClickListener { _, _, pos -> s( busStationAdapter.getItem(pos)!!) }
     }
 
     private fun searchNearbyStation() {
         PoiSearch(context, PoiSearch.Query("", busCode, cityCode).apply { pageSize = 10 })
                 .apply {
                     //设置周边搜索的中心点以及半径
-
                     bound = PoiSearch.SearchBound(Constant.latLonPoint, Constant.radius)
                     setOnPoiSearchListener(object : PoiSearch.OnPoiSearchListener {
                         override fun onPoiItemSearched(p0: PoiItem?, p1: Int) {
@@ -96,7 +86,6 @@ class NearbyStationFra : SupportFragment() {
                         }
 
                         override fun onPoiSearched(result: PoiResult, p1: Int) {
-//                            BusStationOverlay(mapView.map, result.pois).addToMap()
                             busStationAdapter.setNewData(result.pois)
                         }
                     })

@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.bus.adapter
+package com.unicorn.bcykt.busStation.adapter
 
 import com.amap.api.services.core.PoiItem
 import com.chad.library.adapter.base.BaseQuickAdapter

@@ -46,6 +46,7 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.33'
     compile 'com.loopeer.lib:shadow:0.0.3'
     compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+    compile 'net.danlew:android.joda:2.9.9.1'
 }
 repositories {
     mavenCentral()
