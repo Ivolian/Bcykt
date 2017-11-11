@@ -10,13 +10,13 @@ import com.unicorn.bcykt.empty.EmptyFra
 class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     companion object {
-        val titles = listOf("线路", "站点", "班车", "统计")
+        val titles = listOf("附近", "线路", "班车", "统计")
     }
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> BusLineFra()
-            1 -> NearbyStationFra()
+            1 -> BusLineFra()
+            0 -> NearbyStationFra()
             else -> EmptyFra()
         }
     }

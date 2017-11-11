@@ -18,12 +18,15 @@ import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
 import com.amap.api.services.route.*
 import com.amap.api.services.route.RouteSearch.WalkRouteQuery
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.unicorn.bcykt.AMapServicesUtil
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.app.Constant
 import com.unicorn.bcykt.app.Constant.busCode
 import com.unicorn.bcykt.app.Constant.cityCode
 import com.unicorn.bcykt.busStation.adapter.BusStationAdapter
+import com.unicorn.bcykt.busStation.entity.BusStation
+import com.unicorn.bcykt.busStation.entity.BusStationLine
 import com.unicorn.bcykt.busStation.overlay.WalkRouteOverlay
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.fra_nearby_station.*
@@ -72,7 +75,7 @@ class NearbyStationFra : SupportFragment() {
                     .size(1)
                     .build())
         }
-        busStationAdapter.setOnItemClickListener { _, _, pos -> s( busStationAdapter.getItem(pos)!!) }
+//        busStationAdapter.setOnItemClickListener { _, _, pos -> s(busStationAdapter.getItem(pos)!!) }
     }
 
     private fun searchNearbyStation() {
@@ -86,7 +89,17 @@ class NearbyStationFra : SupportFragment() {
                         }
 
                         override fun onPoiSearched(result: PoiResult, p1: Int) {
-                            busStationAdapter.setNewData(result.pois)
+                            val pois = result.pois
+                            val multi = ArrayList<MultiItemEntity>()
+                            for (poi in pois) {
+                                val bus=BusStation(poi)
+                                poi.snippet.split(";").forEach { lineName ->
+                                    bus.addSubItem(BusStationLine(lineName, "一分钟后到达"))
+
+                                }
+                                multi.add(bus)
+                            }
+                            busStationAdapter.setNewData(multi)
                         }
                     })
                     searchPOIAsyn()
@@ -113,10 +126,10 @@ class NearbyStationFra : SupportFragment() {
                 }
 
                 override fun onWalkRouteSearched(result: WalkRouteResult, p1: Int) {
-this@NearbyStationFra.result = result
+                    this@NearbyStationFra.result = result
                     val b = LatLngBounds.builder()
 
-                        b.include(AMapServicesUtil.convertToLatLng(Constant.latLonPoint))
+                    b.include(AMapServicesUtil.convertToLatLng(Constant.latLonPoint))
                     b.include(AMapServicesUtil.convertToLatLng(poiItem.latLonPoint))
 
                     val bounds = b.build()
@@ -132,16 +145,16 @@ this@NearbyStationFra.result = result
 
     }
 
-    var result:WalkRouteResult? = null
+    var result: WalkRouteResult? = null
 
     override fun onBackPressedSupport(): Boolean {
 
-        val points  = ArrayList<LatLng>()
-        if (result == null){
+        val points = ArrayList<LatLng>()
+        if (result == null) {
             return true
         }
-        for (step in result!!.paths[0].steps){
-            for (lng in step.polyline){
+        for (step in result!!.paths[0].steps) {
+            for (lng in step.polyline) {
                 points.add(AMapServicesUtil.convertToLatLng(lng))
             }
         }
