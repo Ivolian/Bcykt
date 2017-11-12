@@ -45,7 +45,10 @@ public class BusLineOverlay {
         }
 
 //        ArrayList var2 = busLineItem.a(latLonPoints);
-        this.polyline = this.map.addPolyline((new PolylineOptions()).addAll(latLngs).color(this.getBusColor()).width(this.getBuslineWidth()));
+        this.polyline = this.map.addPolyline((new PolylineOptions()).addAll(latLngs)
+                .setCustomTexture(BitmapDescriptorFactory.fromResource(R.mipmap.tracelinetexture))
+                .width(this.getBuslineWidth()));
+
         if (this.busStationItemList.size() >= 1) {
             Marker var4;
             for (int i = 1; i < this.busStationItemList.size() - 1; ++i) {
@@ -174,7 +177,7 @@ public class BusLineOverlay {
     }
 
     protected float getBuslineWidth() {
-        return 18.0F;
+        return 54.0F;
     }
 }
 

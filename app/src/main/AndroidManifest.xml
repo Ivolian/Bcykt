@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainAct" />
-        <activity android:name=".BusLineAct" />
+        <activity android:name=".busLine.BusLineAct" />
     </application>
 
 </manifest>

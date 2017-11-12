@@ -1,5 +1,6 @@
 package com.unicorn.bcykt.busLine
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -20,7 +21,7 @@ class BusLineFra : SupportFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        searchBusLine("167")
+        searchBusLine("2")
     }
 
     private fun searchBusLine(keyWord: String) {
@@ -37,6 +38,13 @@ class BusLineFra : SupportFragment() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             busLineAdapter.bindToRecyclerView(this)
+        }
+        busLineAdapter.setOnItemClickListener { _, _, position ->
+            val intent = Intent(context,BusLineAct::class.java)
+            intent.putExtra("keg",busLineAdapter.getItem(position))
+            startActivity(intent)
+//            BusLineActStarter.start(context,"sdf")
+//            BusLineActStarter.start(context, busLineAdapter.getItem(position))
         }
     }
 

@@ -1,27 +1,35 @@
-package com.unicorn.bcykt
+package com.unicorn.bcykt.busLine
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.MyLocationStyle
-import com.amap.api.services.busline.BusLineQuery
-import com.amap.api.services.busline.BusLineSearch
+import com.amap.api.services.busline.BusLineItem
+import com.unicorn.bcykt.BusLineOverlay
+import com.unicorn.bcykt.R
 import kotlinx.android.synthetic.main.act_bus_line.*
 
 
-class BusLineAct : AppCompatActivity(){
+class BusLineAct : AppCompatActivity() {
+
+//    @get:Arg
+//    var busLineItem: BusLineItem  by argExtra()
+
+//    @get:Arg
+//    var grade: String  by argExtra()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_bus_line)
         mapView.onCreate(savedInstanceState)
         renderMap()
-        search("167")
+        val busLineItem = intent.getParcelableExtra<BusLineItem>("keg")
+        BusLineOverlay(map, busLineItem).addToMap()
     }
 
-//
+    //
     private val map by lazy { mapView.map }
 
-     fun renderMap() {
+    fun renderMap() {
         map.apply {
             myLocationStyle = MyLocationStyle().apply {
                 // 定位一次，且将视角移动到地图中心点。
@@ -55,18 +63,5 @@ class BusLineAct : AppCompatActivity(){
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
     }
-
-    fun search(key:String) {
-
-
-        val busStationSearch = BusLineSearch(this, BusLineQuery(key, BusLineQuery.SearchType.BY_LINE_NAME, "021"))
-        busStationSearch.setOnBusLineSearchListener { result ,code ->
-        BusLineOverlay(map, result.busLines[0]).addToMap()
-
-        }
-
-        busStationSearch.searchBusLineAsyn()
-    }
-
 
 }
