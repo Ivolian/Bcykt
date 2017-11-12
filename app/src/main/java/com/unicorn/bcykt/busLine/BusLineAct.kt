@@ -12,8 +12,8 @@ import com.amap.api.maps.utils.overlay.SmoothMoveMarker
 import com.amap.api.services.busline.BusLineItem
 import com.amap.api.services.busline.BusStationItem
 import com.amap.api.services.route.*
-import com.unicorn.bcykt.AMapServicesUtil
-import com.unicorn.bcykt.BusLineOverlay
+import com.unicorn.bcykt.gaode.AMapServicesUtil
+import com.unicorn.bcykt.gaode.BusLineOverlay
 import com.unicorn.bcykt.R
 import kotlinx.android.synthetic.main.act_bus_line.*
 

@@ -1,13 +1,13 @@
 package com.unicorn.bcykt.main
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.main.MainPagerAdapter.Companion.titles
 import kotlinx.android.synthetic.main.act_main.*
-import me.yokeyword.fragmentation.SupportActivity
 
 
-class MainAct : SupportActivity() {
+class MainAct : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +15,7 @@ class MainAct : SupportActivity() {
 
         viewPager.offscreenPageLimit = titles.size - 1
         viewPager.adapter = MainPagerAdapter(supportFragmentManager)
-        smartTab.setViewPager(viewPager)
+        tab.setViewPager(viewPager)
     }
 
 }

@@ -1,7 +1,7 @@
 package com.unicorn.bcykt.busStation
 
-
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.ColorUtils
 import android.support.v7.widget.LinearLayoutManager
@@ -19,21 +19,19 @@ import com.amap.api.services.poisearch.PoiSearch
 import com.amap.api.services.route.*
 import com.amap.api.services.route.RouteSearch.WalkRouteQuery
 import com.chad.library.adapter.base.entity.MultiItemEntity
-import com.unicorn.bcykt.AMapServicesUtil
+import com.unicorn.bcykt.gaode.AMapServicesUtil
 import com.unicorn.bcykt.R
-import com.unicorn.bcykt.app.Constant
-import com.unicorn.bcykt.app.Constant.busCode
-import com.unicorn.bcykt.app.Constant.cityCode
+import com.unicorn.bcykt.app.SharedData
+import com.unicorn.bcykt.app.SharedData.busCode
+import com.unicorn.bcykt.app.SharedData.cityCode
 import com.unicorn.bcykt.busStation.adapter.BusStationAdapter
 import com.unicorn.bcykt.busStation.entity.BusStation
 import com.unicorn.bcykt.busStation.entity.BusStationLine
 import com.unicorn.bcykt.busStation.overlay.WalkRouteOverlay
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.fra_nearby_station.*
-import me.yokeyword.fragmentation.SupportFragment
 
-
-class NearbyStationFra : SupportFragment() {
+class NearbyFra : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fra_nearby_station, container, false)
@@ -62,7 +60,7 @@ class NearbyStationFra : SupportFragment() {
             // 开始定位
             isMyLocationEnabled = true
             setOnMyLocationChangeListener { location ->
-                Constant.latLonPoint = LatLonPoint(location.latitude, location.longitude)
+                SharedData.latLonPoint = LatLonPoint(location.latitude, location.longitude)
                 searchNearbyStation()
             }
         }
@@ -89,7 +87,7 @@ class NearbyStationFra : SupportFragment() {
         PoiSearch(context, PoiSearch.Query("", busCode, cityCode).apply { pageSize = 10 })
                 .apply {
                     //设置周边搜索的中心点以及半径
-                    bound = PoiSearch.SearchBound(Constant.latLonPoint, Constant.radius)
+                    bound = PoiSearch.SearchBound(SharedData.latLonPoint, SharedData.radius)
                     setOnPoiSearchListener(object : PoiSearch.OnPoiSearchListener {
                         override fun onPoiItemSearched(p0: PoiItem?, p1: Int) {
                             // do nothing
@@ -117,7 +115,7 @@ class NearbyStationFra : SupportFragment() {
     var walkRouteOverlay: WalkRouteOverlay? = null
 
     private fun s(poiItem: PoiItem) {
-        val fromAndTo = RouteSearch.FromAndTo(Constant.latLonPoint, poiItem.latLonPoint)
+        val fromAndTo = RouteSearch.FromAndTo(SharedData.latLonPoint, poiItem.latLonPoint)
         val query = WalkRouteQuery(fromAndTo)
 
 
@@ -137,17 +135,17 @@ class NearbyStationFra : SupportFragment() {
                 }
 
                 override fun onWalkRouteSearched(result: WalkRouteResult, p1: Int) {
-                    this@NearbyStationFra.result = result
+                    this@NearbyFra.result = result
                     val b = LatLngBounds.builder()
 
-                    b.include(AMapServicesUtil.convertToLatLng(Constant.latLonPoint))
+                    b.include(AMapServicesUtil.convertToLatLng(SharedData.latLonPoint))
                     b.include(AMapServicesUtil.convertToLatLng(poiItem.latLonPoint))
 
                     val bounds = b.build()
                     mapView.map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
 
                     walkRouteOverlay?.removeFromMap()
-                    walkRouteOverlay = WalkRouteOverlay(context, mapView.map, result.paths[0], Constant.latLonPoint, poiItem.latLonPoint).addToMap()
+                    walkRouteOverlay = WalkRouteOverlay(context, mapView.map, result.paths[0], SharedData.latLonPoint, poiItem.latLonPoint).addToMap()
 
                 }
             })

@@ -1,30 +1,25 @@
 package com.unicorn.bcykt.main
 
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.unicorn.bcykt.busLine.BusLineFra
-import com.unicorn.bcykt.busStation.NearbyStationFra
-import com.unicorn.bcykt.empty.EmptyFra
+import com.unicorn.bcykt.busLine.LineFra
+import com.unicorn.bcykt.busStation.NearbyFra
+import com.unicorn.bcykt.other.EmptyFra
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     companion object {
-        val titles = listOf("附近", "班车", "统计")
+        val titles = listOf("附近", "线路", "班车", "考勤")
     }
 
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
-            1 -> BusLineFra()
-            0 -> NearbyStationFra()
-            else -> EmptyFra()
-        }
+    override fun getItem(pos: Int) = when (pos) {
+        0 -> NearbyFra()
+        1 -> LineFra()
+        else -> EmptyFra()
     }
 
     override fun getCount() = titles.size
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titles[position]
-    }
+    override fun getPageTitle(pos: Int) = titles[pos]
 
 }

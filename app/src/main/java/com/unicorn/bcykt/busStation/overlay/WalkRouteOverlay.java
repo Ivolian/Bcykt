@@ -10,7 +10,7 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.WalkPath;
 import com.amap.api.services.route.WalkStep;
-import com.unicorn.bcykt.AMapServicesUtil;
+import com.unicorn.bcykt.gaode.AMapServicesUtil;
 
 import java.util.List;
 

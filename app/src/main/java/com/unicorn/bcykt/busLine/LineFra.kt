@@ -2,6 +2,7 @@ package com.unicorn.bcykt.busLine
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,8 @@ import com.amap.api.services.busline.BusLineQuery
 import com.amap.api.services.busline.BusLineSearch
 import com.unicorn.bcykt.R
 import kotlinx.android.synthetic.main.fra_bus_line.*
-import me.yokeyword.fragmentation.SupportFragment
 
-class BusLineFra : SupportFragment() {
+class LineFra : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fra_bus_line, container, false)

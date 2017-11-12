@@ -1,11 +1,11 @@
-package com.unicorn.bcykt
+package com.unicorn.bcykt.main
 
 import android.content.Intent
 import android.os.Bundle
-import com.unicorn.bcykt.main.MainAct
-import me.yokeyword.fragmentation.SupportActivity
+import android.support.v7.app.AppCompatActivity
+import com.unicorn.bcykt.R
 
-class SplashAct : SupportActivity() {
+class SplashAct : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

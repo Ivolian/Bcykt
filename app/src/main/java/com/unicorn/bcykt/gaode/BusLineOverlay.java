@@ -1,4 +1,4 @@
-package com.unicorn.bcykt;
+package com.unicorn.bcykt.gaode;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -13,6 +13,7 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.busline.BusLineItem;
 import com.amap.api.services.busline.BusStationItem;
 import com.amap.api.services.core.LatLonPoint;
+import com.unicorn.bcykt.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;

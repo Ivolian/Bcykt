@@ -26,7 +26,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="a32f91c744d2b556676c277053844005" />
 
-        <activity android:name=".SplashAct">
+        <activity android:name=".main.SplashAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
