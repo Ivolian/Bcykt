@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.alorma.timeline.RoundTimelineView
+        android:id="@+id/timeline1"
+        android:layout_width="64dp"
+        android:layout_height="?android:listPreferredItemHeight"
+        app:timeline_lineColor="@color/colorAccent"
+        app:timeline_drawInternal="true"
+        app:timeline_lineWidth="4dp"
+        app:timeline_internalPadding="3dp"
+        app:timeline_indicatorSize="8dp"
+        app:timeline_lineStyle="linear"
+        app:timeline_type="middle" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="四川北路站"
+        android:textColor="@color/material_black"
+        android:textSize="18dp" />
+
+</LinearLayout>
+
+

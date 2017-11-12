@@ -21,7 +21,7 @@ class BusLineFra : SupportFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        searchBusLine("2")
+        searchBusLine("3")
     }
 
     private fun searchBusLine(keyWord: String) {

@@ -10,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.BitmapDescriptorFactory
-import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.LatLngBounds
 import com.amap.api.maps.model.MyLocationStyle
-import com.amap.api.maps.utils.overlay.SmoothMoveMarker
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
@@ -121,6 +119,9 @@ class NearbyStationFra : SupportFragment() {
     private fun s(poiItem: PoiItem) {
         val fromAndTo = RouteSearch.FromAndTo(Constant.latLonPoint, poiItem.latLonPoint)
         val query = WalkRouteQuery(fromAndTo)
+
+
+
         RouteSearch(context).apply {
             setRouteSearchListener(object : RouteSearch.OnRouteSearchListener {
                 override fun onDriveRouteSearched(result: DriveRouteResult?, p1: Int) {
@@ -157,36 +158,7 @@ class NearbyStationFra : SupportFragment() {
 
     var result: WalkRouteResult? = null
 
-    override fun onBackPressedSupport(): Boolean {
 
-        val points = ArrayList<LatLng>()
-        if (result == null) {
-            return true
-        }
-        for (step in result!!.paths[0].steps) {
-            for (lng in step.polyline) {
-                points.add(AMapServicesUtil.convertToLatLng(lng))
-            }
-        }
-        val smoothMarker = SmoothMoveMarker(mapView.map)
-        // 设置滑动的图标
-        smoothMarker.setDescriptor(BitmapDescriptorFactory.fromResource(R.mipmap.map_bus_ic))
-
-        /*
-        //当移动Marker的当前位置不在轨迹起点，先从当前位置移动到轨迹上，再开始平滑移动
-        // LatLng drivePoint = points.get(0);//设置小车当前位置，可以是任意点，这里直接设置为轨迹起点
-        LatLng drivePoint = new LatLng(39.980521,116.351905);//设置小车当前位置，可以是任意点
-        Pair<Integer, LatLng> pair = PointsUtil.calShortestDistancePoint(points, drivePoint);
-        points.set(pair.first, drivePoint);
-        List<LatLng> subList = points.subList(pair.first, points.size());
-        // 设置滑动的轨迹左边点
-        smoothMarker.setPoints(subList);*/
-
-        smoothMarker.setPoints(points)//设置平滑移动的轨迹list
-        smoothMarker.setTotalDuration(10)//设置平滑移动的总时间
-        smoothMarker.startSmoothMove()
-        return true
-    }
 
 // ===================== map =====================
 

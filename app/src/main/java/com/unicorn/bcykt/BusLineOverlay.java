@@ -1,7 +1,5 @@
 package com.unicorn.bcykt;
 
-import android.graphics.Color;
-
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.BitmapDescriptor;
@@ -146,7 +144,7 @@ public class BusLineOverlay {
 
     protected BitmapDescriptor getBusBitmapDescriptor() {
         this.busBitmap =
-                BitmapDescriptorFactory.fromResource(R.mipmap.ic_carpool_bus);
+                BitmapDescriptorFactory.fromResource(R.mipmap.station_bus_18);
         return this.busBitmap;
     }
 
@@ -170,10 +168,6 @@ public class BusLineOverlay {
 
     public BusStationItem getBusStationItem(int pos) {
         return pos >= 0 && pos < this.busStationItemList.size() ? (BusStationItem) this.busStationItemList.get(pos) : null;
-    }
-
-    protected int getBusColor() {
-        return Color.parseColor("#537edc");
     }
 
     protected float getBuslineWidth() {
