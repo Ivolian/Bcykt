@@ -19,7 +19,6 @@ import com.amap.api.services.poisearch.PoiSearch
 import com.amap.api.services.route.*
 import com.amap.api.services.route.RouteSearch.WalkRouteQuery
 import com.chad.library.adapter.base.entity.MultiItemEntity
-import com.unicorn.bcykt.gaode.AMapServicesUtil
 import com.unicorn.bcykt.R
 import com.unicorn.bcykt.app.SharedData
 import com.unicorn.bcykt.app.SharedData.busCode
@@ -27,7 +26,7 @@ import com.unicorn.bcykt.app.SharedData.cityCode
 import com.unicorn.bcykt.busStation.adapter.BusStationAdapter
 import com.unicorn.bcykt.busStation.entity.BusStation
 import com.unicorn.bcykt.busStation.entity.BusStationLine
-import com.unicorn.bcykt.busStation.overlay.WalkRouteOverlay
+import com.unicorn.bcykt.gaode.AMapServicesUtil
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import kotlinx.android.synthetic.main.fra_nearby_station.*
 
@@ -112,7 +111,7 @@ class NearbyFra : Fragment() {
                 }
     }
 
-    var walkRouteOverlay: WalkRouteOverlay? = null
+    var walkRouteOverlay: com.unicorn.bcykt.gaode.overlay.WalkRouteOverlay? = null
 
     private fun s(poiItem: PoiItem) {
         val fromAndTo = RouteSearch.FromAndTo(SharedData.latLonPoint, poiItem.latLonPoint)
@@ -145,7 +144,7 @@ class NearbyFra : Fragment() {
                     mapView.map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
 
                     walkRouteOverlay?.removeFromMap()
-                    walkRouteOverlay = WalkRouteOverlay(context, mapView.map, result.paths[0], SharedData.latLonPoint, poiItem.latLonPoint).addToMap()
+                    walkRouteOverlay = com.unicorn.bcykt.gaode.overlay.WalkRouteOverlay(context, mapView.map, result.paths[0], SharedData.latLonPoint, poiItem.latLonPoint).addToMap()
 
                 }
             })

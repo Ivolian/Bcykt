@@ -118,30 +118,15 @@ public class BusLineOverlay {
 
     private MarkerOptions recycle(int var1) {
         MarkerOptions var2 = (new MarkerOptions()).position(new LatLng(((BusStationItem) this.busStationItemList.get(var1)).getLatLonPoint().getLatitude(), ((BusStationItem) this.busStationItemList.get(var1)).getLatLonPoint().getLongitude())).title(this.getTitle(var1)).snippet(this.getSnippet(var1));
-        if (var1 == 0) {
-            var2.icon(this.getStartBitmapDescriptor());
-        } else if (var1 == this.busStationItemList.size() - 1) {
-            var2.icon(this.getEndBitmapDescriptor());
-        } else {
+
             var2.anchor(0.5F, 0.5F);
             var2.icon(this.getBusBitmapDescriptor());
-        }
 
         return var2;
     }
 
-    protected BitmapDescriptor getStartBitmapDescriptor() {
-        this.startBitmap =
-                BitmapDescriptorFactory.fromResource(R.mipmap.ic_carpool_bus);
-        return this.startBitmap;
-    }
 
-    protected BitmapDescriptor getEndBitmapDescriptor() {
-        this.endBitmap
-                = BitmapDescriptorFactory.fromResource(R.mipmap.ic_carpool_bus);
 
-        return this.endBitmap;
-    }
 
     protected BitmapDescriptor getBusBitmapDescriptor() {
         this.busBitmap =
