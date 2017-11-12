@@ -1,13 +1,13 @@
-package com.unicorn.bcykt.busStation.renderer
+package com.unicorn.bcykt.nearby.renderer
 
 import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.bcykt.R
-import com.unicorn.bcykt.busStation.entity.BusStationLine
+import com.unicorn.bcykt.nearby.entity.NearbyLine
 
-class BusStationLineRender(private val helper: BaseViewHolder, private val busStationLine: BusStationLine) {
+class NearbyLineRender(private val helper: BaseViewHolder, private val item: NearbyLine) {
 
     fun render() {
-        with(busStationLine) {
+        with(item) {
             lineName.let { helper.setText(R.id.tvLineName, it) }
             "约${time}后到达".let { helper.setText(R.id.tvTime, it) }
         }

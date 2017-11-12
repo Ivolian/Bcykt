@@ -1,8 +1,8 @@
-package com.unicorn.bcykt.busStation.entity
+package com.unicorn.bcykt.nearby.entity
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 
-class BusStationLine(val lineName: String, val time: String) : MultiItemEntity {
+class NearbyLine(val lineName: String, val time: String) : MultiItemEntity {
 
     companion object {
         val type = 1
