@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.gaode;
+package com.unicorn.bcykt.gaode.overlay;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;

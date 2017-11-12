@@ -1,11 +1,11 @@
-package com.unicorn.bcykt.busLine
+package com.unicorn.bcykt.line
 
 import com.amap.api.services.busline.BusLineItem
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.bcykt.R
 
-class BusLineAdapter : BaseQuickAdapter<BusLineItem, BaseViewHolder>(R.layout.item_bus_line) {
+class LineAdapter : BaseQuickAdapter<BusLineItem, BaseViewHolder>(R.layout.item_bus_line) {
 
     override fun convert(helper: BaseViewHolder, item: BusLineItem) {
         with(item) {

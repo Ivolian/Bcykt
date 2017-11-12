@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.busLine
+package com.unicorn.bcykt.line.station
 
 import com.alorma.timeline.TimelineView
 import com.alorma.timeline.TimelineView.*
@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.bcykt.R
 
-class BusStationAdapter : BaseQuickAdapter<BusStationItem, BaseViewHolder>(R.layout.item_bus_station2) {
+class StationAdapter : BaseQuickAdapter<BusStationItem, BaseViewHolder>(R.layout.item_station) {
 
     override fun convert(helper: BaseViewHolder, item: BusStationItem) {
         with(item) {
@@ -17,7 +17,6 @@ class BusStationAdapter : BaseQuickAdapter<BusStationItem, BaseViewHolder>(R.lay
                 helper.adapterPosition == 0 -> timeline.timelineType = TYPE_START
                 helper.adapterPosition == data.size-1 -> timeline.timelineType = TYPE_END
                 else -> timeline.timelineType = TYPE_MIDDLE
-
             }
         }
     }

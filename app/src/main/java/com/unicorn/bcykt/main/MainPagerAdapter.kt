@@ -2,7 +2,7 @@ package com.unicorn.bcykt.main
 
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.unicorn.bcykt.busLine.LineFra
+import com.unicorn.bcykt.line.LineFra
 import com.unicorn.bcykt.nearby.NearbyFra
 import com.unicorn.bcykt.other.EmptyFra
 

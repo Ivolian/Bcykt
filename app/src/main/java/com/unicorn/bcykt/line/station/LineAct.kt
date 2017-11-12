@@ -1,4 +1,4 @@
-package com.unicorn.bcykt.busLine
+package com.unicorn.bcykt.line.station
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -12,28 +12,29 @@ import com.amap.api.maps.utils.overlay.SmoothMoveMarker
 import com.amap.api.services.busline.BusLineItem
 import com.amap.api.services.busline.BusStationItem
 import com.amap.api.services.route.*
-import com.unicorn.bcykt.gaode.AMapServicesUtil
-import com.unicorn.bcykt.gaode.BusLineOverlay
 import com.unicorn.bcykt.R
-import kotlinx.android.synthetic.main.act_bus_line.*
+import com.unicorn.bcykt.gaode.AMapServicesUtil
+import com.unicorn.bcykt.gaode.overlay.BusLineOverlay
+import kotlinx.android.synthetic.main.act_line.*
 
 
-class BusLineAct : AppCompatActivity() {
+class LineAct : AppCompatActivity() {
 
-    lateinit var busLineItem:BusLineItem
+    lateinit var busLineItem: BusLineItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_bus_line)
-        mapView.onCreate(savedInstanceState)
+        setContentView(R.layout.act_line)
+        busLineItem = intent.getParcelableExtra("line")
+        lifecycle.addObserver(mapView)
+
         renderMap()
-    initRecyclerView()
-         busLineItem = intent.getParcelableExtra("keg")
+        initRecyclerView()
         BusLineOverlay(map, busLineItem).addToMap()
-    busStationAdapter.setNewData(busLineItem.busStations)
+        busStationAdapter.setNewData(busLineItem.busStations)
     }
 
-    private val busStationAdapter = BusStationAdapter()
+    private val busStationAdapter = StationAdapter()
 
     private fun initRecyclerView() {
         recyclerView.apply {
@@ -42,10 +43,10 @@ class BusLineAct : AppCompatActivity() {
         }
 
         busStationAdapter.setOnItemClickListener { _, _, position ->
-            if (position == busStationAdapter.data.size-1){
-                busStaion = busStationAdapter.getItem(position-1)!!
+            if (position == busStationAdapter.data.size - 1) {
+                busStaion = busStationAdapter.getItem(position - 1)!!
                 busStaion2 = busStationAdapter.getItem(position)!!
-            }else {
+            } else {
                 busStaion = busStationAdapter.getItem(position)!!
                 busStaion2 = busStationAdapter.getItem(position + 1)!!
             }
@@ -60,8 +61,8 @@ class BusLineAct : AppCompatActivity() {
         }
     }
 
-    lateinit var busStaion:BusStationItem
-    lateinit var busStaion2:BusStationItem
+    lateinit var busStaion: BusStationItem
+    lateinit var busStaion2: BusStationItem
 
     //
     private val map by lazy { mapView.map }
@@ -109,7 +110,7 @@ class BusLineAct : AppCompatActivity() {
     }
 
 
-    private fun  show(result:WalkRouteResult){
+    private fun show(result: WalkRouteResult) {
         val points = ArrayList<LatLng>()
         for (step in result.paths[0].steps) step.polyline.mapTo(points) { AMapServicesUtil.convertToLatLng(it) }
         val smoothMarker = SmoothMoveMarker(mapView.map)
@@ -121,28 +122,8 @@ class BusLineAct : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-s()
+        s()
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
-    }
 
 }
